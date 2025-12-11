@@ -162,7 +162,7 @@ plot1 = px.bar(
 plot1
 ```
 
-This bar plot shows the distribution of sentiment scores. Each bar represents the number of positive, negative, and neutral comments. The most comments were in the positive category for the Miami thread.
+This bar plot shows the distribution of sentiment scores. Each bar represents the number of positive, negative, and neutral comments. The most comments were in the positive sentiment category for the Miami thread.
 
 ```{python}
 # Rolling average line graph - Miami game
@@ -326,7 +326,7 @@ plot3 = px.bar(
 plot3
 ```
 
-This bar plot shows the distribution of sentiment scores. Each bar represents the number of positive, negative, and neutral comments. The most comments were in the positive category for the Stanford thread.
+This bar plot shows the distribution of sentiment scores. Each bar represents the number of positive, negative, and neutral comments. The most comments were in the positive sentiment category for the Stanford thread.
 
 ```{python}
 # Rolling average line graph - Stanford game
@@ -547,11 +547,11 @@ plot9
 Finally, this line graph shows the rolling average sentiment across all comments, separated by game (Miami and Stanford). The different colors represent each game, allowing for a clear comparison of sentiment trends throughout the comments for both games. There are fluctuations in sentiment for both games, indicating that fan reactions varied significantly during the discussions.
 
 
-Project Conclusions:
+Sentiment Analysis Project Conclusions:
 - The sentiment analysis of fan comments from the Notre Dame athletics forum revealed that overall, fans expressed a more positive sentiment towards both the Miami and Stanford games. The average sentiment scores for both games were above zero, indicating a generally favorable view.
 - The Miami game had a slightly higher average sentiment score compared to the Stanford game, suggesting that fans were more enthusiastic during this game and at the beginning of the season.
 - It should be noted that there were more comments in the Miami thread (113 pages) compared to the Stanford thread (53 pages), which may have influenced the overall sentiment distribution.
-- The rolling average graphs for both games showed spikes and dips in sentiment over the course of the games/comment index, suggesitn that college football fans are highly emotional and reactive to in-game moments.
+- The rolling average graphs for both games showed spikes and dips in sentiment over the course of the games/comment index, suggesting that college football fans are highly emotional and reactive to in-game moments.
 - Stanford discussions showed a higher proportion of neutral and negative reactions, likely influenced by late-season emotions and expectations.
 - Combined analysis shows a stable, season-level trend despite individual game variation.
 - Implications: Tracking sentiment can help with communications, marketing, and fan-engagement strategies.

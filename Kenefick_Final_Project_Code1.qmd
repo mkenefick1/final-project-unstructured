@@ -181,7 +181,7 @@ plot2
 
 
 ```{python}
-# Now the latest game (ND vs. Stanford) -- stanford first page
+# Now the latest game (ND vs. Stanford) -- Stanford first page
 
 import requests
 import re
