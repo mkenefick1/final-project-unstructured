@@ -53,6 +53,7 @@ for x in comments:
 nd_miami = pd.DataFrame(links)
 nd_miami.head()
 ```
+
 Overall, this code block only looped through one page of comments on the Miami vs. Notre Dame game fan forum on irishenvy.com, which took place on August 31st, 2025. Instead of jumping in and looping through all 113 pages right away, the idea was to gather a handful of comments on one page to ensure the code is functioning correctly.
 
 The packages imported at the top of the qmd file (re, requests, BeautifulSoup, urllib3, and pandas) were required to ensure the code runs. The first URL pointed to the first page of Miami comments, which was inspected, and the comments were scraped. 
@@ -108,7 +109,7 @@ def scrape_miami(thread_url, pages=113): # double checked and 113 pages is the c
         
         """start at row 1 on page one because the table 
         comes back with the header (row 0) (ATNotre Dame Fighting Irish 
-        at Miami (FL) HurricanesHard Rock StadiumMiami, FloridaAugust 31, 20257:30 PM​)) 
+        at Miami (FL) HurricanesHard Rock StadiumMiami, FloridaAugust 31, 20257:30 PM​) 
         that will mess with my analysis. a staff member posted the game time, day, team, etc. don't need this in my analysis"""
         if page_num == 1:  
             comments = comments[1:]
@@ -138,7 +139,8 @@ df.head()
 
 print(df.to_markdown())
 ```
-In this chunk of code, I sampled a stopword list to remove unnecessary words, scraped through the entire Miami vs. ND thread, looping over all 113 pages to collect every comment from this game. Next, I created a dataframe called "df" with all the comments and removed whitespace and blank comments that would impact the analysis.
+
+In this chunk of code, I sampled a stopword list to remove unnecessary words, scraped through the entire Miami vs. ND thread, looping over all 113 pages to collect every comment from this game. It is important to note that I removed the first row of the first page because this was a header for the game, including time, day, teams, and location. Next, I created a dataframe called "df" with all the comments and removed whitespace and blank comments that would impact the analysis.
 
 After, I ran a sentiment analysis by importing SentimentIntensityAnalyzer and defined that a score below -0.05 is negative, above 0.05 is positive, and everything else is neutral. I chose 0.05 and -0.05 as the threshold to categorize sentiments as strongly positive or strongly negative.
 
@@ -159,7 +161,8 @@ plot1 = px.bar(
 
 plot1
 ```
-This bar plot shows the distribution of sentiment scores. Each bar represents the number of positive, negative, and neutral comments. The most comments were in the ___ category for the Miami thread.
+
+This bar plot shows the distribution of sentiment scores. Each bar represents the number of positive, negative, and neutral comments. The most comments were in the positive category for the Miami thread.
 
 ```{python}
 # Rolling average line graph - Miami game
@@ -179,6 +182,7 @@ plot2 = px.line(
 
 plot2
 ```
+
 This line graph shows the rolling average sentiment over the course of the Miami game. There are plenty of spikes and dips in this graph, suggesting the comments were highly reactive to in-game moments.
 
 ```{python}
@@ -227,6 +231,7 @@ for x in comments2:
 nd_stanford = pd.DataFrame(links2)
 nd_stanford.head()
 ```
+
 Overall, this code block only looped through one page of comments on the Stanford vs. Notre Dame game fan forum on irishenvy.com, which took place on November 29th, 2025. Instead of jumping in and looping through all 53 pages right away, the idea was to gather a handful of comments on one page to ensure the code is functioning correctly.
 
 The packages imported at the top of the qmd file (re, requests, BeautifulSoup, urllib3, and pandas) were required to ensure the code runs. The first URL pointed to the first page of Stanford comments, which was inspected, and the comments were scraped. 
@@ -299,7 +304,8 @@ df2.head()
 
 print(df2.to_markdown())
 ```
-In this chunk of code, I sampled a stopword list to remove unnecessary words, scraped through the entire Stanford vs. ND thread, looping over all 53 pages to collect every comment from this game. Next, I created a dataframe called "df2" with all the comments and removed whitespace and blank comments that would impact the analysis.
+
+In this chunk of code, I sampled a stopword list to remove unnecessary words, scraped through the entire Stanford vs. ND thread, looping over all 53 pages to collect every comment from this game. It is important to note that I removed the first row of the first page because this was a header for the game, including time, day, teams, and location. Next, I created a dataframe called "df2" with all the comments and removed whitespace and blank comments that would impact the analysis.
 
 After, I ran a sentiment analysis by importing SentimentIntensityAnalyzer and defined that a score below -0.05 is negative, above 0.05 is positive, and everything else is neutral. I chose 0.05 and -0.05 as the threshold to categorize sentiments as strongly positive or strongly negative.
 
@@ -320,6 +326,7 @@ plot3 = px.bar(
 plot3
 ```
 
+This bar plot shows the distribution of sentiment scores. Each bar represents the number of positive, negative, and neutral comments. The most comments were in the positive category for the Stanford thread.
 
 ```{python}
 # Rolling average line graph - Stanford game
@@ -337,6 +344,7 @@ plot4 = px.line(
 plot4
 ```
 
+This line graph shows the rolling average sentiment over the course of the Stanford game. There are plenty of spikes and dips in this graph, suggesting the comments were highly reactive to in-game moments.
 
 ```{python}
 # concatenate the dfs and add games column to separate
@@ -350,6 +358,7 @@ full_comments
 print(full_comments.to_markdown())
 ```
 
+Here, I combined both dataframes (Miami - df and Stanford - df2) into one dataframe called full_comments. I added a new column called "Game" to differentiate between the two games in the full_comments dataframe. Finally, I printed the combined dataframe in markdown table format for easy access.
 
 ```{python}
 # dfs length check
@@ -362,6 +371,7 @@ length_check = len(full_comments)
 length_check
 ```
 
+In this code block, I used the len() function to check the individual lengths of both dataframes (df and df2). Then, I added them together to ensure the combined length matched the length of the full_comments dataframe. This was a way to verify that I was correct when I combined the dataframes and no data was lost.
 
 ```{python}
 full_comments['Sentiment Score'] = full_comments['Comment'].apply(lambda x: vader.polarity_scores(x)['compound'])
@@ -373,6 +383,7 @@ full_comments
 print(full_comments.to_markdown())
 ```
 
+This code takes the sentiment scores and labels from the dataframes and combines them into the full_comments dataframe. I applied the same sentiment analysis functions used previously to ensure consistency across the entire dataset. Finally, I printed the updated full_comments dataframe in markdown table format for easy access.
 
 ```{python}
 miami_avg_sent_score = df['Sentiment Score'].mean()
@@ -380,6 +391,7 @@ miami_avg_sent_score = df['Sentiment Score'].mean()
 miami_avg_sent_score
 ```
 
+I took the average sentiment score for the Miami game comments using the mean() function and displayed the result.
 
 ```{python}
 miami_sent_counts = df['Sentiment Label'].value_counts()
@@ -389,6 +401,7 @@ miami_sent_counts
 print(miami_sent_counts.to_markdown())
 ```
 
+This code block counts the number of comments in each sentiment category (positive, negative, neutral) for the Miami game using the value_counts() function. The results are printed in markdown table format for easy access.
 
 ```{python}
 stan_avg_sent_score = df2['Sentiment Score'].mean()
@@ -396,6 +409,7 @@ stan_avg_sent_score = df2['Sentiment Score'].mean()
 stan_avg_sent_score
 ```
 
+I took the average sentiment score for the Stanford game comments using the mean() function and displayed the result.
 
 ```{python}
 stan_sent_counts = df2['Sentiment Label'].value_counts()
@@ -405,6 +419,7 @@ stan_sent_counts
 print(stan_sent_counts.to_markdown())
 ```
 
+This code block counts the number of comments in each sentiment category (positive, negative, neutral) for the Stanford game using the value_counts() function. The results are printed in markdown table format for easy access.
 
 ```{python}
 full_comments_sent_counts = full_comments['Sentiment Label'].value_counts()
@@ -414,6 +429,7 @@ full_comments_sent_counts
 print(full_comments_sent_counts.to_markdown())
 ```
 
+This code block counts the number of comments in each sentiment category (positive, negative, neutral) for the combined dataframe using the value_counts() function. The results are printed in markdown table format for easy access.
 
 ```{python}
 full_comments_avg_sent = full_comments['Sentiment Score'].mean()
@@ -421,6 +437,7 @@ full_comments_avg_sent = full_comments['Sentiment Score'].mean()
 full_comments_avg_sent
 ```
 
+I took the average sentiment score for all comments (both games) using the mean() function and displayed the result.
 
 ```{python}
 top_positive = full_comments.sort_values(by='Sentiment Score', ascending=False).head(10)
@@ -431,6 +448,7 @@ top_positive
 print(top_positive.to_markdown())
 ```
 
+I sorted the full_comments dataframe in descending order based on the sentiment scores to identify the top 10 most positive comments. I selected the relevant columns (Game, Comment, Sentiment Score) for display and printed the results in markdown table format for easy access.
 
 ```{python}
 top_negative = full_comments.sort_values(by='Sentiment Score', ascending=True).head(10)
@@ -441,6 +459,7 @@ top_negative
 print(top_negative.to_markdown())
 ```
 
+I sorted the full_comments dataframe in ascending order based on the sentiment scores to identify the top 10 most negative comments. I selected the relevant columns (Game, Comment, Sentiment Score) for display and printed the results in markdown table format for easy access.
 
 ```{python}
 # Rolling average line graph - full comments
@@ -459,6 +478,7 @@ plot5 = px.line(
 plot5
 ```
 
+This line graph shows the rolling average sentiment over the course of all comments from both games. There are plenty of spikes and dips in this graph, suggesting the comments were highly reactive to in-game moments.
 
 ```{python}
 # bar graph showing distribution of sentiment scores (neutral, positive, negative) by game
@@ -475,6 +495,7 @@ plot6 = px.bar(
 plot6
 ```
 
+This bar graph shows the distribution of sentiment scores for both games combined. Each bar represents the number of positive, negative, and neutral comments. The most comments were in the positive category overall.
 
 ```{python}
 # bar chart for avg sentiment by miami and stan
@@ -491,6 +512,7 @@ plot7 = px.bar(games, x="Game", y="Average Sentiment", color="Game", title="Aver
 plot7
 ```
 
+In this bar chart, I created a new dataframe called games that contains the average sentiment scores for both the Miami and Stanford games. The bar chart visualizes the average sentiment for each game, allowing for easy comparison between the two.
 
 ```{python}
 # distribution of sentiment scores by game
@@ -506,6 +528,7 @@ plot8 = px.histogram(
 plot8
 ```
 
+This histogram shows the distribution of sentiment scores for both games. The x-axis represents the sentiment scores, while the y-axis shows the count of comments within each score range. The colors differentiate between the Miami and Stanford games.
 
 ```{python}
 # sentiment full comments separated by miami and stan
@@ -520,3 +543,17 @@ plot9 = px.line(
 
 plot9
 ```
+
+Finally, this line graph shows the rolling average sentiment across all comments, separated by game (Miami and Stanford). The different colors represent each game, allowing for a clear comparison of sentiment trends throughout the comments for both games. There are fluctuations in sentiment for both games, indicating that fan reactions varied significantly during the discussions.
+
+
+Project Conclusions:
+- The sentiment analysis of fan comments from the Notre Dame athletics forum revealed that overall, fans expressed a more positive sentiment towards both the Miami and Stanford games. The average sentiment scores for both games were above zero, indicating a generally favorable view.
+- The Miami game had a slightly higher average sentiment score compared to the Stanford game, suggesting that fans were more enthusiastic during this game and at the beginning of the season.
+- It should be noted that there were more comments in the Miami thread (113 pages) compared to the Stanford thread (53 pages), which may have influenced the overall sentiment distribution.
+- The rolling average graphs for both games showed spikes and dips in sentiment over the course of the games/comment index, suggesitn that college football fans are highly emotional and reactive to in-game moments.
+- Stanford discussions showed a higher proportion of neutral and negative reactions, likely influenced by late-season emotions and expectations.
+- Combined analysis shows a stable, season-level trend despite individual game variation.
+- Implications: Tracking sentiment can help with communications, marketing, and fan-engagement strategies.
+- Project Limitations: Different comment totals between games can skew game-to-game comparisons.
+- Future Work: Include Reddit/other forums, analyze recruiting sentiment, and compare home vs. away games.

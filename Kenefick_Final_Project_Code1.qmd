@@ -1,6 +1,6 @@
 ---
 title: "Project Code"
-format: html
+format: gfm
 ---
 
 ```{python}
@@ -56,6 +56,15 @@ nd_miami = pd.DataFrame(links)
 nd_miami.head()
 ```
 
+Overall, this code block only looped through one page of comments on the Miami vs. Notre Dame game fan forum on irishenvy.com, which took place on August 31st, 2025. Instead of jumping in and looping through all 113 pages right away, the idea was to gather a handful of comments on one page to ensure the code is functioning correctly.
+
+The packages imported at the top of the qmd file (re, requests, BeautifulSoup, urllib3, and pandas) were required to ensure the code runs. The first URL pointed to the first page of Miami comments, which was inspected, and the comments were scraped. 
+
+The stopwords were defined in this code block. Stopwords are unnecessary words that have no impact on this sentiment analysis.
+
+Next, the raw comments were cleaned using regular expressions. They removed usernames like "x said:," "Click to expand," extra whitespace, and the stopwords defined previously.
+
+Then, I cleaned all the first page comments with a for loop, making sure each comment was properly processed and standardized. Finally, I created a dataframe called nd_miami and called the first five rows to ensure the code ran and looked appropriate to move forward.
 
 ```{python}
 # stopwords
